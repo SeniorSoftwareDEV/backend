@@ -1,7 +1,10 @@
 from flask_cors import CORS
-from flask import Flask
+from flask import Flask, send_from_directory
 from flask_mysqldb import MySQL
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../../frontend/build/static')
+@app.route('/')
+def index():
+    return send_from_directory('../../frontend/build', 'index.html')
 CORS(app)
 app.config['MYSQL_HOST'] = 'tradingbuddy.cjwfktkwkbo1.us-east-1.rds.amazonaws.com'
 app.config['MYSQL_USER'] = 'admin'
