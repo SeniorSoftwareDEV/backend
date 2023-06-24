@@ -5,6 +5,10 @@ app = Flask(__name__, static_folder='../../frontend/build/static')
 @app.route('/')
 def index():
     return send_from_directory('../../frontend/build', 'index.html')
+@app.route('/<path:text>')
+def all_routes(text):
+    return send_from_directory('../../frontend/build', 'index.html')
+
 CORS(app)
 app.config['MYSQL_HOST'] = 'tradingbuddy.cjwfktkwkbo1.us-east-1.rds.amazonaws.com'
 app.config['MYSQL_USER'] = 'admin'
