@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, jsonify, request
+from flask import request
 import os
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium import webdriver
@@ -6,7 +6,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from api.config import app
 
-activity_blueprint = Blueprint("activity", __name__)
 
 @app.route("/activity/getsplithistory", methods=["POST"])
 def get_splithistory():
@@ -32,6 +31,7 @@ def get_splithistory():
         print('Scraping start---')
         driver.get(url)
         table_element = driver.find_element(By.XPATH, '/html/body/center/div[4]/table[2]/tbody/tr/td[6]/table[1]')
+        print(table_element)
         rows = table_element.find_elements(By.XPATH,'.//tbody/tr')
         rawArray= []
         i=0
